@@ -1,0 +1,4 @@
+Pillow==8.1.0
+Pillow==10.0.0
+pycryptodome==3.14.1
+Requests==2.31.0
