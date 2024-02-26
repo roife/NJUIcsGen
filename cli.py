@@ -36,11 +36,13 @@ def mergeAdjacentKlasses(klasses: list[Klass]) -> list[Klass]:
     return klasses
 
 if __name__ == '__main__':
-    year: str = str(datetime.now().year)
-    term: str = '2' if datetime.now().month < 9 else '1'
+    now = datetime.now()
+    year: str = str(now.year)
+    term: str = '2' if now.month < 9 else '1'
+    school_year = str(now.year - 1) if now.month < 9 else year
 
     session: str = loginAndGetSession()
-    klasses: list[Klass] = Fetcher(session, year, term).fetch_all_klasses()
+    klasses: list[Klass] = Fetcher(session, year, term, school_year).fetch_all_klasses()
     klasses = mergeAdjacentKlasses(klasses)
 
     with open('classes.ics', 'w+', encoding='utf-8') as f:

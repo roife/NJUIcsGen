@@ -17,10 +17,11 @@ class Fetcher:
     LABEL_START_TIME = 'KSSJ'
     LABEL_END_TIME = 'JSSJ'
 
-    def __init__(self, session: Session, year: str, term: str):
+    def __init__(self, session: Session, year: str, term: str, school_year: str):
         self.session: Session = session
         self.year: str = year
         self.term: str = term
+        self.school_year: str = school_year
 
     def __parse_klass_data(self, data: dict, weekday2date: list[date]) -> Klass:
         STRPTIME_FORMAT: str = '%Y.%m.%d %H%M'
@@ -38,7 +39,7 @@ class Fetcher:
 
     def __fetch_weekday2date(self, week: str) -> Optional[list[date]]:
         data = {
-            'xnxqdm': self.year + self.term,
+            'xnxqdm': self.school_year + self.term,
             'zc': week,
         }
 
@@ -52,7 +53,7 @@ class Fetcher:
             return []
 
         data = {
-            'XNXQDM': self.year + self.term,
+            'XNXQDM': self.school_year + self.term,
             'DQZC': week,
         }
 
